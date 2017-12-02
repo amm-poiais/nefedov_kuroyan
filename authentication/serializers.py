@@ -50,9 +50,8 @@ class VkTokenSerializer(serializers.Serializer):
     def validate_vk(self, attrs):
         vk_token = attrs.get('vk_token')
         service_token = settings.VK_SERVICE_TOKEN
-        client_secret = settings.VK_CLIENT_SECRET
 
-        vk_session = VkApi(token=service_token, client_secret=client_secret)
+        vk_session = VkApi(token=service_token)
         vk_api_wrapper = vk_session.get_api()
 
         try:

@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication',
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -98,6 +101,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'authentication.User'
+DRF_AUTH_FIELD = 'email'
+
+VK_SERVICE_TOKEN = '24c500b824c500b824c500b818249ada6c224c524c500b87ee773a0cac732e3686ed065'
 
 
 # Internationalization

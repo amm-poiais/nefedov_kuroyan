@@ -48,7 +48,7 @@ class AccountViewSet(mixins.CreateModelMixin,
         }, status=status.HTTP_403_FORBIDDEN)
 
 
-class ObtainAuthTokenMulti(views.APIView):
+class ObtainAuthTokenMultiView(views.APIView):
     throttle_classes = ()
     permission_classes = ()
     parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser)
