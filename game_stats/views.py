@@ -1,3 +1,4 @@
+import logging
 from django.db import connection
 
 from rest_framework import views
@@ -43,6 +44,9 @@ class UpdateScoreView(views.APIView):
             return cursor.fetchone()[0]
 
     def post(self, request: Request, game_id, difficulty_id):
+        logger = logging.getLogger('heroku')
+        logger.info("Hello, heroku logs")
+        
         new_score = request.data.get('score', None)
         player = request.user
         game = Game.objects.get(pk=game_id)
