@@ -18,5 +18,13 @@ class ScoreEntry(models.Model):
     difficulty = models.ForeignKey(to=Difficulty)
     best_score = models.IntegerField()
 
+    def __str__(self):
+        return "U: {}; G: {}; D: {}; S: {};".format(
+            self.user.email,
+            self.game.name,
+            self.difficulty.name,
+            self.best_score
+        )
+
     class Meta:
         unique_together=(('user', 'game', 'difficulty'),)
