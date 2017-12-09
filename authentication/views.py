@@ -6,6 +6,7 @@ from django.shortcuts import render
 
 from rest_framework import parsers, permissions, viewsets, views, mixins, status, renderers
 from rest_framework.authtoken.models import Token
+from rest_framework.request import Request
 from rest_framework.response import Response
 from vk_api import VkApi
 
@@ -76,9 +77,9 @@ class ObtainAuthTokenMultiView(views.APIView):
         else:
             return validated_data["user"]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: Request, *args, **kwargs):
         logger = logging.getLogger('heroku')
-        logger.info('Attempt to auth with toke: {}'.format(request.data.get('vk_token', 'empty_token')))
+        logger.info('Post data: {}'.format(request.data))
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
