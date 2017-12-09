@@ -4,6 +4,12 @@ from authentication.models import User
 from game_stats.models import ScoreEntry, Game, Difficulty
 
 
+class GameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = "__all__"
+
+
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
