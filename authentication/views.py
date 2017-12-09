@@ -79,7 +79,7 @@ class ObtainAuthTokenMultiView(views.APIView):
 
     def post(self, request: Request, *args, **kwargs):
         logger = logging.getLogger('heroku')
-        logger.info('Request body: '.format(request.body))
+        logger.info('Raw data: {}'.format(request.body))
 
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
