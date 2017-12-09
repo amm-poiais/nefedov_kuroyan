@@ -1,3 +1,5 @@
+import logging
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
@@ -75,6 +77,8 @@ class ObtainAuthTokenMultiView(views.APIView):
             return validated_data["user"]
 
     def post(self, request, *args, **kwargs):
+        logger = logging.getLogger('heroku')
+        logger.info('Attempt to auth with toke: {}'.format(request.data.get('vk_token', 'empty_token')))
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
