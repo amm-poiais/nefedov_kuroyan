@@ -26,7 +26,7 @@ SECRET_KEY = '1dg^w-e1c9x!5#)i2f65+8y+yif0x^pvrnh#t82pi1$x%%cts_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "mind-blower.herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "172.20.10.3", "mind-blower.herokuapp.com"]
 
 
 # Application definition

@@ -32,3 +32,23 @@ def get_player_pos(game_id, difficulty_id, player_id):
             player_id,
         ])
         return cursor.fetchone()[0]
+
+
+def get_player_high_score(game_id, difficulty_id, player_id) -> int:
+    try:
+        score_entry = ScoreEntry.objects.get(game_id=game_id,
+                                             difficulty_id=difficulty_id,
+                                             user_id=player_id)
+        return score_entry.best_score
+    except ScoreEntry.DoesNotExist:
+        return -1
+
+
+def get_total_player_count(game_id = None, difficulty_id = None):
+    with connection.cursor() as cursor:
+        query_str = 'SELECT COUNT(1) AS players_count ' \
+                    'FROM game_stats_scoreentry AS scoreentry ' \
+                    'WHERE (scoreentry.game_id = %s) AND ' \
+                    '      (scoreentry.difficulty_id = %s)'
+        data = cursor.execute(query_str, [game_id, difficulty_id])
+        return cursor.fetchone()[0]

@@ -6,7 +6,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from game_stats.models import *
-from game_stats.utils import get_top10, get_player_pos
+from game_stats.utils import get_top10, get_player_pos, get_player_high_score
 from game_stats.serializers import ScoreEntrySerializer, GameSerializer
 
 
@@ -45,7 +45,7 @@ class UpdateScoreView(views.APIView):
         top10_serializer = ScoreEntrySerializer(top10, many=True)
         return Response({
             "your_place": get_player_pos(game_id, difficulty_id, player.id),
-            "got_higher": got_higher,
+            "your_high_score": get_player_high_score(game_id, difficulty_id, player.id),
             "top10": top10_serializer.data,
         })
 
@@ -55,10 +55,15 @@ class UpdateScoreView(views.APIView):
 
         top10_serializer = ScoreEntrySerializer(top10players, many=True)
 
-        return Response({
-            "your_place": get_player_pos(game_id, difficulty_id, player.id),
+        response_dict = {
             "top10": top10_serializer.data
-        })
+        }
+
+        if player:
+            response_dict["your_place"] = get_player_pos(game_id, difficulty_id, player.id)
+            response_dict["your_high_score"] = get_player_high_score(game_id, difficulty_id, player.id)
+
+        return Response(response_dict)
 
 
 class GameView(views.APIView):
