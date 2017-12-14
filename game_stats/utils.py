@@ -3,10 +3,7 @@ from game_stats.models import *
 
 
 def get_top10(game_id, difficulty_id):
-    game = Game.objects.get(pk=game_id)
-    difficulty = Difficulty.objects.get(pk=difficulty_id)
-
-    top10players = ScoreEntry.objects.filter(game=game, difficulty=difficulty)
+    top10players = ScoreEntry.objects.filter(game_id=game_id, difficulty_id=difficulty_id)
     return top10players.order_by('-best_score')[:10]
 
 
